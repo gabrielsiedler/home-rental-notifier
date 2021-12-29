@@ -5,19 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "ts-node src/index.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hellosurbhi/puppeteer-starter-code.git"
-  },
-  "author": "hellosurbhi",
+  "author": "gabrielsiedler",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hellosurbhi/puppeteer-starter-code/issues"
-  },
-  "homepage": "https://github.com/hellosurbhi/puppeteer-starter-code#readme",
   "dependencies": {
-    "puppeteer": "^5.5.0"
+    "chalk": "^4.1.2",
+    "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.1.4",
+    "puppeteer": "^13.0.1",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "twilio": "^3.72.0",
+    "typescript": "^4.5.4"
   }
 }
