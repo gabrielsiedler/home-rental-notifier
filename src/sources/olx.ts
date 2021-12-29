@@ -33,16 +33,17 @@ export const scraper = async (page, filter, url) => {
     houses.push(house)
   })
 
-  const entry: any = await Entry.find({ filter })
-  let last = entry?.last_id
+  const entry: any = await Entry.findOne({ filter })
+  let lastId = entry?.last_id
 
-  if (last && last !== houses[0].id) {
+  if (lastId && lastId !== houses[0].id) {
     const newEntries: any = []
 
+    // only notify the newest house for now
     sendWhatsappMessage(`New house found. ${houses[0].title}. Access ${houses[0].href}. Filter: ${url}`)
 
     for (let i = 0; i < houses.length; i++) {
-      if (houses[i].id === last) break
+      if (houses[i].id === lastId) break
 
       newEntries.push(houses[i])
     }
@@ -50,9 +51,9 @@ export const scraper = async (page, filter, url) => {
     console.log(newEntries)
   }
 
-  last = houses[0].id
+  lastId = houses[0].id
 
-  await Entry.updateOne({ filter }, { $set: { last_id: last } }, { upsert: true })
+  await Entry.updateOne({ filter }, { $set: { last_id: lastId } }, { upsert: true })
 
   console.log(chalk.green(`*** Completed [${filter}]`))
 }
