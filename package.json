@@ -1,7 +1,7 @@
 {
-  "name": "puppeteer-starter-code",
+  "name": "home-rental-notifier",
   "version": "1.0.0",
-  "description": "starter code for any puppeteer project",
+  "description": "Home rental notifier",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
