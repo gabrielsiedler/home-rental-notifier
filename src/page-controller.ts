@@ -44,6 +44,7 @@ export const scrapeAll = async (browser) => {
       }
 
       console.log(chalk.grey(`*** Interval. Waiting for ${LONGWAIT / 1000 / 60} minutes.`))
+      await sleep(LONGWAIT)
     }
 
     await browser.close()
