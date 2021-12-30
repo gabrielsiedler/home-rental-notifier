@@ -5,10 +5,12 @@ import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../twilio'
 
 export const scraper = async (page, filter, url) => {
-  console.log(chalk.grey(`\n*** Starting olx - ${filter}`))
+  console.log(chalk.grey(`\n*** Starting zap - ${filter}`))
 
   await page.goto(url)
-  await page.waitForSelector('.sc-1fcmfeb-2').catch((error) => console.log('failed to wait for the selector', error))
+  await page
+    .waitForSelector('.card-container.js-listing-card')
+    .catch((error) => console.log('failed to wait for the selector', error))
 
   const html = await page.evaluate(() => document.querySelector('*')!.outerHTML)
 
@@ -16,11 +18,10 @@ export const scraper = async (page, filter, url) => {
 
   const houses: any = []
 
-  $('.sc-1fcmfeb-2').each(function (this: any) {
-    const _link = $(this).find('a')
-    const id = _link.attr('data-lurker_list_id')
-    const href = _link.attr('href')
-    const title = _link.attr('title')
+  $('.card-container.js-listing-card').each(function (this: any) {
+    const id = $(this).attr('data-id')
+    const href = `https://www.zapimoveis.com.br/imovel/${id}`
+    const title = $(this).find('.simple-card__address').text().replace('\n', '').trim()
 
     if (!id) return
 
@@ -40,7 +41,7 @@ export const scraper = async (page, filter, url) => {
     const newEntries: any = []
 
     // only notify the newest house for now
-    sendWhatsappMessage(`Nova casa no OLX. ${houses[0].title}. Access ${houses[0].href}. Filter: ${url}`)
+    sendWhatsappMessage(`Nova casa no ZAP. ${houses[0].title}. Access ${houses[0].href}. Filter: ${url}`)
 
     for (let i = 0; i < houses.length; i++) {
       if (houses[i].id === lastId) break
@@ -55,5 +56,5 @@ export const scraper = async (page, filter, url) => {
 
   await Entry.updateOne({ filter }, { $set: { last_id: lastId } }, { upsert: true })
 
-  console.log(chalk.green(`*** Completed olx - ${filter}`))
+  console.log(chalk.green(`*** Completed zap - ${filter}`))
 }
