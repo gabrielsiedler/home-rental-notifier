@@ -1,13 +1,14 @@
 import chalk from 'chalk'
 
 import { runBrognoli } from './sources/brognoli'
+import { runIbagy } from './sources/ibagy'
 import { runOlx } from './sources/olx'
 import { runQuintoAndar } from './sources/quinto-andar'
 import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
 import constants from './utils/constants'
 
-const runners: any = [runOlx, runZap, runQuintoAndar, runBrognoli]
+const runners: any = [runOlx, runZap, runQuintoAndar, runBrognoli, runIbagy]
 
 const setupTab = async (tab) => {
   await tab.setDefaultNavigationTimeout(constants.TIMEOUT)
