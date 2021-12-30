@@ -6,6 +6,6 @@ export const sendWhatsappMessage = async (source, { id, href, title }) => {
   await twilioClient.messages.create({
     from: 'whatsapp:+14155238886',
     to: `whatsapp:${process.env.TWILIO_TARGET_NUMBER}`,
-    message,
+    body: message,
   })
 }

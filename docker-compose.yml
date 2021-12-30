@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   mongodb:
     image: mongo
@@ -11,3 +11,16 @@ services:
     ports:
       - 27017:27017
     restart: unless-stopped
+  server:
+    build: .
+    container_name: house-rental-notifier
+    command: npm start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017

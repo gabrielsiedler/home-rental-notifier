@@ -5,9 +5,7 @@ import { sendWhatsappMessage } from '../../services/twilio'
 
 export const scraper = async (page, filter, url) => {
   await page.goto(url)
-  await page
-    .waitForSelector('.card-container.js-listing-card')
-    .catch((error) => console.log('failed to wait for the selector', error))
+  await page.waitForSelector('.card-container.js-listing-card')
 
   const html = await page.evaluate(() => document.querySelector('*')!.outerHTML)
 
