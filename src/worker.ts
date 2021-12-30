@@ -1,9 +1,10 @@
 import chalk from 'chalk'
 
-import constants from './utils/constants'
 import { runOlx } from './sources/olx'
+import { runQuintoAndar } from './sources/quinto-andar'
 import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
+import constants from './utils/constants'
 
 export const start = async (browser) => {
   try {
@@ -17,6 +18,7 @@ export const start = async (browser) => {
     while (1) {
       await runZap(page)
       await runOlx(page)
+      await runQuintoAndar(page)
 
       console.log(chalk.grey(`*** Interval. Waiting for ${constants.LONGWAIT / 1000 / 60} minutes.`))
       await sleep(constants.LONGWAIT)
