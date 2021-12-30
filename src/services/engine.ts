@@ -1,5 +1,6 @@
 import cheerio from 'cheerio'
 import chalk from 'chalk'
+import prettyjson from 'prettyjson'
 
 import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
@@ -30,7 +31,7 @@ export const scraper = async (page, source, filter, url, selectors) => {
   sendWhatsappMessage(`${source}-${filter}`, houses[0])
 
   console.log(chalk.blue(`*** Found house:`))
-  console.log(chalk.blue(houses[0]))
+  console.log(prettyjson.render(houses[0]))
   console.log('\n')
 
   lastId = houses[0].id
