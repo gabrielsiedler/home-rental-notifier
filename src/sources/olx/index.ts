@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 
-import constants from '../../constants'
 import { error, sleep } from '../../utils/bundle'
+import constants from '../../utils/constants'
 import { scraper as olxScrapper } from './engine'
 
 const filters = [

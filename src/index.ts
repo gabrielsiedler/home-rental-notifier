@@ -1,9 +1,9 @@
 import dotenv from 'dotenv'
 import puppeteer from 'puppeteer'
 
-import { startBrowser } from './browser'
-import { scrapeAll } from './page-controller'
-import { twilioSetup } from './twilio'
+import { startBrowser } from './setup/browser'
+import { twilioSetup } from './setup/twilio'
+import * as worker from './worker'
 
 dotenv.config()
 
@@ -12,7 +12,7 @@ const start = async () => {
 
   let browserInstance = await startBrowser(puppeteer)
 
-  scrapeAll(browserInstance)
+  worker.start(browserInstance)
 }
 
 start()

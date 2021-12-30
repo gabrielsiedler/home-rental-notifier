@@ -1,4 +1,4 @@
-import { mongoose } from '../db'
+import { mongoose } from '../setup/db'
 
 const schema = {
   filter: String,

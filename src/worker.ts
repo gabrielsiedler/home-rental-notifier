@@ -1,11 +1,11 @@
 import chalk from 'chalk'
 
-import constants from './constants'
+import constants from './utils/constants'
 import { runOlx } from './sources/olx'
 import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
 
-export const scrapeAll = async (browser) => {
+export const start = async (browser) => {
   try {
     let page = await browser.newPage()
 

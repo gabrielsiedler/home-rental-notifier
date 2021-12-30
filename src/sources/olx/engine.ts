@@ -1,7 +1,7 @@
 import cheerio from 'cheerio'
 
 import { Entry } from '../../models/Entry'
-import { sendWhatsappMessage } from '../../twilio'
+import { sendWhatsappMessage } from '../../services/twilio'
 
 export const scraper = async (page, filter, url) => {
   await page.goto(url)
@@ -37,7 +37,7 @@ export const scraper = async (page, filter, url) => {
     const newEntries: any = []
 
     // only notify the newest house for now
-    sendWhatsappMessage(`Nova casa no OLX. ${houses[0].title}. Access ${houses[0].href}. Filter: ${url}`)
+    sendWhatsappMessage('OLX', houses[0])
 
     for (let i = 0; i < houses.length; i++) {
       if (houses[i].id === lastId) break
