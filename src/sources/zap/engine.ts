@@ -1,12 +1,9 @@
-import chalk from 'chalk'
 import cheerio from 'cheerio'
 
-import { Entry } from '../models/Entry'
-import { sendWhatsappMessage } from '../twilio'
+import { Entry } from '../../models/Entry'
+import { sendWhatsappMessage } from '../../twilio'
 
 export const scraper = async (page, filter, url) => {
-  console.log(chalk.grey(`\n*** Starting zap - ${filter}`))
-
   await page.goto(url)
   await page
     .waitForSelector('.card-container.js-listing-card')
@@ -55,6 +52,4 @@ export const scraper = async (page, filter, url) => {
   lastId = houses[0].id
 
   await Entry.updateOne({ filter }, { $set: { last_id: lastId } }, { upsert: true })
-
-  console.log(chalk.green(`*** Completed zap - ${filter}`))
 }

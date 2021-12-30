@@ -1,12 +1,9 @@
-import chalk from 'chalk'
 import cheerio from 'cheerio'
 
-import { Entry } from '../models/Entry'
-import { sendWhatsappMessage } from '../twilio'
+import { Entry } from '../../models/Entry'
+import { sendWhatsappMessage } from '../../twilio'
 
 export const scraper = async (page, filter, url) => {
-  console.log(chalk.grey(`\n*** Starting olx - ${filter}`))
-
   await page.goto(url)
   await page.waitForSelector('.sc-1fcmfeb-2').catch((error) => console.log('failed to wait for the selector', error))
 
@@ -54,6 +51,4 @@ export const scraper = async (page, filter, url) => {
   lastId = houses[0].id
 
   await Entry.updateOne({ filter }, { $set: { last_id: lastId } }, { upsert: true })
-
-  console.log(chalk.green(`*** Completed olx - ${filter}`))
 }
