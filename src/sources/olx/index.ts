@@ -1,8 +1,9 @@
 import chalk from 'chalk'
 
+import { scraper } from '../../services/engine'
 import { error, sleep } from '../../utils/bundle'
 import constants from '../../utils/constants'
-import { scraper as olxScrapper } from './engine'
+import selectors from './selectors'
 
 const filters = [
   'itacorubi',
@@ -19,10 +20,11 @@ export const runOlx = async (page) => {
     try {
       console.log(chalk.grey(`\n*** Starting olx - ${filter}`))
 
-      await olxScrapper(
+      await scraper(
         page,
         filter,
         `https://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel/casas?ps=2000&q=${filter}&sf=1`,
+        selectors,
       )
 
       console.log(chalk.green(`*** Completed olx - ${filter}`))
