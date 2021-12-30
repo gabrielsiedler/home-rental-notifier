@@ -5,11 +5,12 @@ import { runGiacomelli } from './sources/giacomelli'
 import { runIbagy } from './sources/ibagy'
 import { runOlx } from './sources/olx'
 import { runQuintoAndar } from './sources/quinto-andar'
+import { runVivaReal } from './sources/vivareal'
 import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
 import constants from './utils/constants'
 
-const runners: any = [runOlx, runZap, runQuintoAndar, runBrognoli, runIbagy, runGiacomelli]
+const runners: any = [runOlx, runZap, runQuintoAndar, runBrognoli, runIbagy, runGiacomelli, runVivaReal]
 
 const setupTab = async (tab) => {
   await tab.setDefaultNavigationTimeout(constants.TIMEOUT)
