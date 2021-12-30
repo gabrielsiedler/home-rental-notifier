@@ -6,19 +6,24 @@ import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
 import constants from './utils/constants'
 
+const runners: any = [runOlx, runZap, runQuintoAndar]
+
 export const start = async (browser) => {
   try {
-    let tabs = [await browser.newPage(), await browser.newPage(), await browser.newPage()]
+    for (let i = 0; i < runners.length; i += 1) {
+      const tab = await browser.newPage()
 
-    for (let tab of tabs) {
       await tab.setUserAgent(
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
       )
+
       await tab.setViewport({ width: 960, height: 768 })
+
+      runners[i] = runners[i](tab)
     }
 
     while (1) {
-      await Promise.all([runOlx(tabs[0]), runZap(tabs[1]), runQuintoAndar(tabs[2])])
+      await Promise.all(runners)
 
       console.log(chalk.grey(`*** Interval. Waiting for ${constants.LONGWAIT / 1000 / 60} minutes.`))
       await sleep(constants.LONGWAIT)
