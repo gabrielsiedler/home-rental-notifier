@@ -1,7 +1,7 @@
 import { twilioClient } from '../setup/twilio'
 
 export const sendWhatsappMessage = async (source, { id, href, title }) => {
-  const message = `Nova casa em ${source}.\n\n${id} - ${title}.\n\n${href}.`
+  const message = `${href}\n\nNova casa em ${source}.\n\n${id} - ${title}`
 
   await twilioClient.messages.create({
     from: 'whatsapp:+14155238886',

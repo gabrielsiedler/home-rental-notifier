@@ -32,7 +32,7 @@ export const start = async (browser) => {
         runnersPromise.push(runners[i](tab))
       }
 
-      await Promise.all([runnersPromise])
+      await Promise.all(runnersPromise)
 
       console.log(chalk.grey(`*** Interval. Waiting for ${constants.LONGWAIT / 1000 / 60} minutes.`))
 

@@ -3,7 +3,7 @@ export default {
   grabber: ($, ctx) => {
     const title =
       $(ctx).find('[data-testid="house-card-address"]').text() + $(ctx).find('[data-testid="house-card-region"]').text()
-    const href = $(ctx).find('> a').attr('href')
+    const href = `https://quintoandar.com.br${$(ctx).find('> a').attr('href')}`
     const id = href!.match(/\/imovel\/(\d+)?.*/)![1]
 
     return {
