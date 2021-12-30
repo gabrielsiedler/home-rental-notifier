@@ -1,4 +1,5 @@
 import cheerio from 'cheerio'
+import chalk from 'chalk'
 
 import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
@@ -24,24 +25,13 @@ export const scraper = async (page, filter, url, selectors) => {
   const entry: any = await Entry.findOne({ filter })
   let lastId = entry?.last_id
 
-  if (lastId && lastId !== houses[0].id) {
-    const newEntries: any = []
+  if (lastId === houses[0].id) return
 
-    // only notify the newest house for now
-    sendWhatsappMessage(filter, houses[0])
+  sendWhatsappMessage(filter, houses[0])
 
-    for (let i = 0; i < houses.length; i++) {
-      if (houses[i].id === lastId) break
+  console.log(chalk.blue(`*** Found house: ${houses[0]}`))
 
-      newEntries.push(houses[i])
-    }
+  lastId = houses[0].id
 
-    console.log(newEntries)
-  }
-
-  if (lastId !== houses[0].id) {
-    lastId = houses[0].id
-
-    await Entry.updateOne({ filter }, { $set: { last_id: lastId } }, { upsert: true })
-  }
+  await Entry.updateOne({ filter }, { $set: { last_id: lastId } }, { upsert: true })
 }
