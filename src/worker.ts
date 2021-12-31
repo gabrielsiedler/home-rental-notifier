@@ -7,6 +7,7 @@ import { runDaltonAndrade } from './sources/dalton-andrade'
 import { runGiacomelli } from './sources/giacomelli'
 import { runGralha } from './sources/gralha'
 import { runIbagy } from './sources/ibagy'
+import { runJump } from './sources/jump'
 import { runOlx } from './sources/olx'
 import { runQuintoAndar } from './sources/quinto-andar'
 import { runRegente } from './sources/regente'
@@ -30,6 +31,7 @@ const runners: any = [
   runDaltonAndrade,
   runArbo,
   runSeiter,
+  runJump,
 ]
 
 const setupTab = async (tab) => {
