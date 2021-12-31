@@ -1,5 +1,7 @@
 import chalk from 'chalk'
+import puppeteer from 'puppeteer'
 
+import { startBrowser } from './setup/browser'
 import { runArbo } from './sources/arbo'
 import { runBrognoli } from './sources/brognoli'
 import { runChavesNaMao } from './sources/chaves-na-mao'
@@ -44,9 +46,11 @@ const setupTab = async (tab) => {
   await tab.setViewport({ width: 960, height: 768 })
 }
 
-export const start = async (browser) => {
+export const start = async () => {
   try {
     while (1) {
+      let browser = await startBrowser(puppeteer)
+
       let runnersPromise: any = []
 
       for (let i = 0; i < runners.length; i += 1) {
@@ -62,9 +66,9 @@ export const start = async (browser) => {
       console.log(chalk.grey(`*** Interval. Waiting for ${constants.LONGWAIT / 1000 / 60} minutes.`))
 
       await sleep(constants.LONGWAIT)
-    }
 
-    await browser.close()
+      await browser.close()
+    }
   } catch (err) {
     console.log('Could not resolve the browser instance => ', err)
   }
