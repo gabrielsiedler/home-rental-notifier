@@ -2,6 +2,7 @@ import chalk from 'chalk'
 
 import { runBrognoli } from './sources/brognoli'
 import { runChavesNaMao } from './sources/chaves-na-mao'
+import { runDaltonAndrade } from './sources/dalton-andrade'
 import { runGiacomelli } from './sources/giacomelli'
 import { runGralha } from './sources/gralha'
 import { runIbagy } from './sources/ibagy'
@@ -24,6 +25,7 @@ const runners: any = [
   runRegente,
   runGralha,
   runChavesNaMao,
+  runDaltonAndrade,
 ]
 
 const setupTab = async (tab) => {
