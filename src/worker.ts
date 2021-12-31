@@ -1,6 +1,6 @@
 import chalk from 'chalk'
-import { runArbo } from './sources/arbo'
 
+import { runArbo } from './sources/arbo'
 import { runBrognoli } from './sources/brognoli'
 import { runChavesNaMao } from './sources/chaves-na-mao'
 import { runDaltonAndrade } from './sources/dalton-andrade'
@@ -10,6 +10,7 @@ import { runIbagy } from './sources/ibagy'
 import { runOlx } from './sources/olx'
 import { runQuintoAndar } from './sources/quinto-andar'
 import { runRegente } from './sources/regente'
+import { runSeiter } from './sources/seiter'
 import { runVivaReal } from './sources/vivareal'
 import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
@@ -28,6 +29,7 @@ const runners: any = [
   runChavesNaMao,
   runDaltonAndrade,
   runArbo,
+  runSeiter,
 ]
 
 const setupTab = async (tab) => {
