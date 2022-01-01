@@ -1,3 +1,6 @@
+import { Db } from 'mongodb'
+import { MigrationInterface } from 'mongo-migrate-ts'
+
 const mapper = {
   'arbo-arbo': { source: 'Arbo', filter: { label: 'All', value: null } },
   'brognoli-brognoli': { source: 'Brognoli', filter: { label: 'All', value: null } },
@@ -46,11 +49,9 @@ const mapper = {
   'vivaReal-trindade': { source: 'Viva Real', filter: { label: 'Trindade', value: 'trindade' } },
 }
 
-module.exports = {
-  async up(db, client) {
+export class NewDBStructure implements MigrationInterface {
+  public async up(db: Db): Promise<any> {
     const entries = await db.collection('entries').find({}).toArray()
-
-    console.log('entries', entries)
 
     for (let entry of entries) {
       const newObject = {
@@ -60,17 +61,16 @@ module.exports = {
           {
             entry_id: entry.last_id,
             status: 'unchanged',
+            ranAt: Date.now(),
           },
         ],
       }
 
-      await db.collection('entries').updateOne({ filter: entry.filter }, newObject, { upsert: true })
+      const rows = await db.collection('entries').replaceOne({ filter: entry.filter }, newObject, { upsert: true })
     }
-  },
+  }
 
-  async down(db, client) {
-    // TODO write the statements to rollback your migration (if possible)
-    // Example:
-    // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: false}});
-  },
+  public async down(db: Db): Promise<any> {
+    // throw new Error('no op')
+  }
 }

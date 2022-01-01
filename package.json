@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
-    "migrate:up": "migrate-mongo up",
-    "migrate:down": "migrate-mongo down"
+    "migrate:create": "ts-node migrations/index.ts new",
+    "migrate:up": "ts-node migrations/index.ts up",
+    "migrate:down": "ts-node migrations/index.ts down"
   },
   "author": "gabrielsiedler",
   "license": "ISC",
@@ -15,7 +16,7 @@
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
-    "migrate-mongo": "^8.2.3",
+    "mongo-migrate-ts": "^1.0.13",
     "mongoose": "^6.1.4",
     "prettyjson": "^1.2.1",
     "puppeteer": "^13.0.1",
