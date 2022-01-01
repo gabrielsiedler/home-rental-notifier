@@ -42,7 +42,7 @@ export const runGralha = async (page) => {
       selectors,
       source,
       filter,
-      `https://www.gralhaimoveis.com.br/aluguel/casa/bai+sc+florianopolis+${filter}`,
+      `https://www.gralhaimoveis.com.br/aluguel/casa/bai+sc+florianopolis+${filter.value}`,
     )
   }
 }

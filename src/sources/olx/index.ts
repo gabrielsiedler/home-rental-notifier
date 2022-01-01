@@ -19,7 +19,7 @@ export const runOlx = async (page) => {
       selectors,
       source,
       filter,
-      `https://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel/casas?ps=2000&q=${filter}&sf=1`,
+      `https://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel/casas?ps=2000&q=${filter.value}&sf=1`,
     )
   }
 }

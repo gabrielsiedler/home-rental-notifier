@@ -17,7 +17,7 @@ export const runQuintoAndar = async (page) => {
       selectors,
       source,
       filter,
-      `https://www.quintoandar.com.br/alugar/imovel/${filter}-florianopolis-sc-brasil/casa/casacondominio/de-2000-a-20000-aluguel/3-4-quartos/2-3-4-banheiros/1-2-3-vagas`,
+      `https://www.quintoandar.com.br/alugar/imovel/${filter.value}-florianopolis-sc-brasil/casa/casacondominio/de-2000-a-20000-aluguel/3-4-quartos/2-3-4-banheiros/1-2-3-vagas`,
     )
   }
 }

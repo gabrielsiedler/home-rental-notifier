@@ -19,7 +19,7 @@ export const runIbagy = async (page) => {
       selectors,
       source,
       filter,
-      `https://ibagy.com.br/aluguel/casa/florianopolis/${filter}/2-dormitorios/com-suite/com-vaga/`,
+      `https://ibagy.com.br/aluguel/casa/florianopolis/${filter.value}/2-dormitorios/com-suite/com-vaga/`,
     )
   }
 }

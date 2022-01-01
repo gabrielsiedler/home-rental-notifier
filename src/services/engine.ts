@@ -41,7 +41,7 @@ export const scraper = async (page, source, filter, url, selectors) => {
     return
   }
 
-  sendWhatsappMessage(`${source}-${filter}`, houses[0])
+  sendWhatsappMessage(`${source} ${filter.label}`, houses[0])
 
   console.log(chalk.blue(`*** Found house:`))
   console.log(prettyjson.render(houses[0]))
