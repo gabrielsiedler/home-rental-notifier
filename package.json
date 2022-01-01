@@ -13,6 +13,7 @@
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
+    "migrate-mongo": "^8.2.3",
     "mongoose": "^6.1.4",
     "prettyjson": "^1.2.1",
     "puppeteer": "^13.0.1",
