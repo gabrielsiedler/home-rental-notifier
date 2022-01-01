@@ -9,7 +9,15 @@ export const scraper = async (page, source, filter, url, selectors) => {
   await page.goto(url)
   await page.waitForSelector(selectors.listItem)
 
-  const html = await page.evaluate(() => document.querySelector('*')!.outerHTML)
+  let html
+
+  try {
+    html = await page.evaluate(() => document.querySelector('*')!.outerHTML)
+  } catch (error) {
+    await Entry.createRun(source, filter, null, 'failed')
+
+    throw error
+  }
 
   const $ = cheerio.load(html)
 
@@ -23,10 +31,15 @@ export const scraper = async (page, source, filter, url, selectors) => {
     houses.push(house)
   })
 
-  const entry: any = await Entry.findOne({ filter: `${source}-${filter}` })
-  let lastId = entry?.last_id
+  const currentHouseId = houses[0].id
 
-  if (lastId === houses[0].id) return
+  const houseAlreadyFound = await Entry.containsHouseId(source, filter, currentHouseId)
+
+  if (houseAlreadyFound) {
+    await Entry.createRun(source, filter, currentHouseId, 'unchanged')
+
+    return
+  }
 
   sendWhatsappMessage(`${source}-${filter}`, houses[0])
 
@@ -34,7 +47,5 @@ export const scraper = async (page, source, filter, url, selectors) => {
   console.log(prettyjson.render(houses[0]))
   console.log('\n')
 
-  lastId = houses[0].id
-
-  await Entry.updateOne({ filter: `${source}-${filter}` }, { $set: { last_id: lastId } }, { upsert: true })
+  await Entry.createRun(source, filter, currentHouseId, 'found')
 }
