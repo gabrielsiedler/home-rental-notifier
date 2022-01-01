@@ -1,9 +1,9 @@
 export default {
-  listItem: '.sc-1fcmfeb-2',
+  listItem: '.card-container.js-listing-card',
   grabber: ($, ctx) => {
-    const id = $(this).attr('data-id')
+    const id = $(ctx).attr('data-id')
     const href = `https://www.zapimoveis.com.br/imovel/${id}`
-    const title = $(this).find('.simple-card__address').text().replace('\n', '').trim()
+    const title = $(ctx).find('.simple-card__address').text().replace('\n', '').trim()
 
     return {
       id,
