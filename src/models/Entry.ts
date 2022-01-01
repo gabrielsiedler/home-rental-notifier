@@ -3,7 +3,10 @@ import { mongoose } from '../setup/db'
 
 const schema = new Schema<any>({
   source: String,
-  filter: String,
+  filter: {
+    label: String,
+    value: String,
+  },
   total_runs: Number,
   runs: [
     {
