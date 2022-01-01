@@ -1,14 +1,15 @@
 import { runner } from '../../services/runner'
 import selectors from './selectors'
 
+const source = 'Olx'
 const filters = [
-  'itacorubi',
-  'corrego+grande',
-  'trindade',
-  'santa+monica',
-  'agronomica',
-  'lagoa+da+conceicao',
-  'campeche',
+  { label: 'Itacorubi', value: 'itacorubi' },
+  { label: 'Córrego Grande', value: 'corrego+grande' },
+  { label: 'Trindade', value: 'trindade' },
+  { label: 'Santa Mônica', value: 'santa+monica' },
+  { label: 'Agronômica', value: 'agronomica' },
+  { label: 'Lagoa da Conceição', value: 'lagoa+da+conceicao' },
+  { label: 'Campeche', value: 'campeche' },
 ]
 
 export const runOlx = async (page) => {
@@ -16,7 +17,7 @@ export const runOlx = async (page) => {
     await runner(
       page,
       selectors,
-      'olx',
+      source,
       filter,
       `https://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel/casas?ps=2000&q=${filter}&sf=1`,
     )
