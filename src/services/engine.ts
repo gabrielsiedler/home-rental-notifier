@@ -7,17 +7,15 @@ import { sendWhatsappMessage } from '../services/twilio'
 
 export const scraper = async (page, source, filter, url, selectors) => {
   await page.goto(url)
-  await page.waitForSelector(selectors.listItem)
-
-  let html
-
   try {
-    html = await page.evaluate(() => document.querySelector('*')!.outerHTML)
+    await page.waitForSelector(selectors.listItem)
   } catch (error) {
-    await Entry.createRun(source, filter, null, 'failed')
+    await Entry.createRun(source, filter, null, 'error')
 
     throw error
   }
+
+  const html = await page.evaluate(() => document.querySelector('*')!.outerHTML)
 
   const $ = cheerio.load(html)
 
