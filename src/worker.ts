@@ -18,6 +18,7 @@ import { runVivaReal } from './sources/vivareal'
 import { runZap } from './sources/zap'
 import { sleep } from './utils/bundle'
 import constants from './utils/constants'
+import { applyVariation } from './utils/time'
 
 const runners: any = [
   runOlx,
@@ -63,9 +64,10 @@ export const start = async () => {
 
       await Promise.all(runnersPromise)
 
-      console.log(chalk.grey(`*** Interval. Waiting for ${constants.LONGWAIT / 1000 / 60} minutes.`))
+      const sleepDuration = applyVariation(constants.LONGWAIT, constants.LONGWAIT_VARIATION)
+      console.log(chalk.grey(`*** Interval. Waiting for ${sleepDuration / 1000 / 60} minutes.`))
 
-      await sleep(constants.LONGWAIT)
+      await sleep(sleepDuration)
 
       await browser.close()
     }

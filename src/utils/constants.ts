@@ -1,5 +1,7 @@
 export default {
   WAIT: 30 * 1000,
+  WAIT_VARIATION: 8 * 1000,
   LONGWAIT: 15 * 60 * 1000,
+  LONGWAIT_VARIATION: 2 * 60 * 1000,
   TIMEOUT: 60 * 1000,
 }
