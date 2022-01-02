@@ -16,7 +16,7 @@ import { runRegente } from './sources/regente'
 import { runSeiter } from './sources/seiter'
 import { runVivaReal } from './sources/vivareal'
 import { runZap } from './sources/zap'
-import { sleep } from './utils/bundle'
+import { round, sleep } from './utils/bundle'
 import constants from './utils/constants'
 import { applyVariation } from './utils/time'
 
@@ -65,7 +65,7 @@ export const start = async () => {
       await Promise.all(runnersPromise)
 
       const sleepDuration = applyVariation(constants.LONGWAIT, constants.LONGWAIT_VARIATION)
-      console.log(chalk.grey(`*** Interval. Waiting for ${sleepDuration / 1000 / 60} minutes.`))
+      console.log(chalk.grey(`*** Interval. Waiting for ${round(sleepDuration / 1000 / 60)} minutes.`))
 
       await sleep(sleepDuration)
 

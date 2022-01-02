@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 
 import { scraper } from '../services/engine'
-import { error, sleep } from '../utils/bundle'
+import { error, round, sleep } from '../utils/bundle'
 import constants from '../utils/constants'
 import { applyVariation } from '../utils/time'
 
@@ -17,7 +17,7 @@ export const runner = async (page, selectors, source, filter, url) => {
   }
 
   const sleepDuration = applyVariation(constants.WAIT, constants.WAIT_VARIATION)
-  console.log(chalk.grey(`*** Waiting for ${sleepDuration / 1000} seconds.`))
+  console.log(chalk.grey(`*** Waiting for ${round(sleepDuration / 1000)} seconds.`))
 
   await sleep(sleepDuration)
 }
