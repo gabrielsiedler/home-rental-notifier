@@ -16,7 +16,7 @@ interface Props {
 export const Card = ({
   source: { name, runs, found, errors, lastRunStatus, status, currentFilter, totalFilters },
 }: Props) => (
-  <Box borderStyle="round" width={33} flexDirection="column">
+  <Box borderStyle="single" width={33} flexDirection="column">
     <Title title={name} />
     <Spacer />
     <RunSummary runs={runs} found={found} errors={errors} />

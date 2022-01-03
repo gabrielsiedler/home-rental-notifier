@@ -1,8 +1,9 @@
-import { Box, render } from 'ink'
+import { Box, render, Text } from 'ink'
 import React from 'react'
 
 import manager, { Source } from '../sources-manager'
 import { Card } from './Card/Card'
+import { Console } from './Console/Console'
 
 const App = () => {
   const cards = Object.keys(manager).map((key) => {
@@ -15,6 +16,7 @@ const App = () => {
     <Box flexDirection="column">
       <Box>{cards.slice(0, 7)}</Box>
       <Box>{cards.slice(7, 14)}</Box>
+      <Console />
     </Box>
   )
 }
