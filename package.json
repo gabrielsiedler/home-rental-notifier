@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "migrate:create": "ts-node migrations/index.ts new",
     "migrate:up": "ts-node migrations/index.ts up",
     "migrate:down": "ts-node migrations/index.ts down"
@@ -16,11 +17,13 @@
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
+    "ink": "^3.2.0",
+    "ink-spinner": "^4.0.3",
     "mongo-migrate-ts": "^1.0.13",
     "mongoose": "^6.1.4",
     "prettyjson": "^1.2.1",
     "puppeteer": "^13.0.1",
-    "terminal-kit": "^2.3.0",
+    "react": "^17.0.2",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "twilio": "^3.72.0",
