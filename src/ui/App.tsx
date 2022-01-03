@@ -1,19 +1,20 @@
 import { Box, render } from 'ink'
 import React from 'react'
 
+import manager, { Source } from '../sources-manager'
 import { Card } from './Card/Card'
 
 const App = () => {
+  const cards = Object.keys(manager).map((key) => {
+    const source: Source = manager[key]
+
+    return <Card key={source.name} source={source} />
+  })
+
   return (
-    <Box>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      {/* <Link url="https://github.com/gabrielsiedler/home-rental-notifier">
-        My <Text color="cyan">gabrielsiedler/home-rental-notifier</Text>
-      </Link> */}
+    <Box flexDirection="column">
+      <Box>{cards.slice(0, 7)}</Box>
+      <Box>{cards.slice(7, 14)}</Box>
     </Box>
   )
 }

@@ -1,21 +1,32 @@
 import { Box } from 'ink'
 import React from 'react'
 
+import { Source } from '../../sources-manager'
 import { Spacer } from '../shared/Spacer'
-import { RunStatus, SourceStatus } from '../types'
 import { RunSummary } from './RunSummary/RunSummary'
 import { Spinner } from './Spinner/Spinner'
 import { StatusSummary } from './StatusSummary/StatusSummary'
 import { Title } from './Title/Title'
 
-export const Card = () => (
+interface Props {
+  source: Source
+  key: any
+}
+
+export const Card = ({
+  source: { name, runs, found, errors, lastRunStatus, status, currentFilter, totalFilters },
+}: Props) => (
   <Box borderStyle="round" width={33} flexDirection="column">
-    <Title title="Brognoli" />
+    <Title title={name} />
     <Spacer />
-    <RunSummary runs={15} found={1} errors={0} />
+    <RunSummary runs={runs} found={found} errors={errors} />
     <Spacer />
-    <StatusSummary last={RunStatus.Unchanged} status={SourceStatus.Running} />
+    <StatusSummary last={lastRunStatus} status={status} />
     <Spacer />
-    <Spinner currentFilterIndex={4} amountOfFilters={11} currentFilterLabel="Lagoa da Conceição" />
+    <Spinner
+      currentFilterIndex={currentFilter.index}
+      amountOfFilters={totalFilters}
+      currentFilterLabel={currentFilter.label}
+    />
   </Box>
 )
