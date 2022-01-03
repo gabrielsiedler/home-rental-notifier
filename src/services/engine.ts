@@ -6,7 +6,7 @@ import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
 
 export const scraper = async (page, source, filter, url, selectors) => {
-  await page.goto(url)
+  await page.goto(url(filter))
   try {
     await page.waitForSelector(selectors.listItem)
   } catch (error) {
