@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer'
 import { runner } from './services/runner'
 
 import { startBrowser } from './setup/browser'
-import * as sources from './sources/arbo'
+import * as sources from './sources'
 
 import { round, sleep } from './utils/bundle'
 import constants from './utils/constants'
