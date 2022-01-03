@@ -1,4 +1,4 @@
-import { Text } from 'ink'
+import { Text, Box } from 'ink'
 import Spinner from 'ink-spinner'
 import React from 'react'
 
@@ -9,16 +9,18 @@ interface Props {
 }
 
 const SpinnerComponent = ({ currentFilterIndex, amountOfFilters, currentFilterLabel }: Props) => (
-  <Text>
-    <Text color="green">
-      {' '}
-      <Spinner type="arc" />
-    </Text>{' '}
+  <Box>
     <Text>
-      [{currentFilterIndex}/{amountOfFilters}]
-    </Text>{' '}
-    <Text>{currentFilterLabel}</Text>
-  </Text>
+      <Text color="green">
+        {' '}
+        <Spinner type="triangle" />
+      </Text>{' '}
+      <Text>
+        [{currentFilterIndex}/{amountOfFilters}]
+      </Text>{' '}
+      <Text>{currentFilterLabel}</Text>
+    </Text>
+  </Box>
 )
 
 export { SpinnerComponent as Spinner }

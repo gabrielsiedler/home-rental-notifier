@@ -1,4 +1,4 @@
-import { Text } from 'ink'
+import { Text, Color } from 'ink'
 import React from 'react'
 
 interface Props {
@@ -10,13 +10,22 @@ interface Props {
 export const RunSummary = ({ runs, found, errors }: Props) => (
   <>
     <Text>
-      <Text bold>Runs:</Text> <Text color="grey">{runs}</Text>
+      <Text bold>Runs:</Text>{' '}
+      <Color grey>
+        <Text>{runs}</Text>
+      </Color>
     </Text>
     <Text>
-      Found: <Text color="green">{found}</Text>
+      Found:{' '}
+      <Color green>
+        <Text>{found}</Text>
+      </Color>
     </Text>
     <Text>
-      Errors: <Text color="red">{errors}</Text>
+      Errors:{' '}
+      <Color red>
+        <Text color="red">{errors}</Text>
+      </Color>
     </Text>
   </>
 )

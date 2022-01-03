@@ -1,4 +1,4 @@
-import { Box, Text } from 'ink'
+import { Box, Text, Color } from 'ink'
 import React from 'react'
 
 interface Props {
@@ -7,8 +7,8 @@ interface Props {
 
 export const Title = ({ title }: Props) => (
   <Box justifyContent="center" alignItems="center" height={2}>
-    <Text bold color="blue">
-      {title}
-    </Text>
+    <Color blue>
+      <Text bold>{title}</Text>
+    </Color>
   </Box>
 )
