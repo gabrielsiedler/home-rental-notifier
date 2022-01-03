@@ -39,7 +39,7 @@ export const Card = ({
   }, [])
 
   return (
-    <Box borderStyle="single" width={33} flexDirection="column">
+    <Box borderStyle="single" flexDirection="column" width={33} padding={1}>
       <Title title={name} />
       <Spacer />
       <RunSummary runs={runs} found={found} errors={errors} />

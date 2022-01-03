@@ -1,10 +1,18 @@
-import { Box, Text } from 'ink'
+import { Box, Color, Text } from 'ink'
 import React from 'react'
 
-export const Console = () => {
+interface Props {
+  console: string[]
+}
+
+export const Console = ({ console }: Props) => {
   return (
-    <Box borderStyle="single">
-      <Text>Console goes here</Text>
+    <Box width="100%" flexDirection="column">
+      {console.map((line) => (
+        <Text key={line}>
+          <Color lightgrey>[13:25:14]</Color> {line}
+        </Text>
+      ))}
     </Box>
   )
 }
