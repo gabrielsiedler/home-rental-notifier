@@ -25,6 +25,7 @@
     "prettyjson": "^1.2.1",
     "puppeteer": "^13.0.1",
     "react": "^17.0.2",
+    "redux": "4",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "twilio": "^3.72.0",

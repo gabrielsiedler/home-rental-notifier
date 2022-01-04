@@ -1,6 +1,5 @@
 import cheerio from 'cheerio'
-import chalk from 'chalk'
-import prettyjson from 'prettyjson'
+import uiConsole from '../services/Console'
 
 import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
@@ -39,11 +38,8 @@ export const scraper = async (page, source, filter, url, selectors) => {
     return
   }
 
+  uiConsole.addEntry('Found house. Sending whatsapp message.')
   sendWhatsappMessage(`${source} ${filter.label}`, houses[0])
-
-  console.log(chalk.blue(`*** Found house:`))
-  console.log(prettyjson.render(houses[0]))
-  console.log('\n')
 
   await Entry.createRun(source, filter, currentHouseId, 'found')
 }

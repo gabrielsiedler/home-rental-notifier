@@ -1,11 +1,9 @@
-import chalk from 'chalk'
 import puppeteer from 'puppeteer'
-import { runner } from './services/runner'
 
+import { runner } from './services/runner'
 import { startBrowser } from './setup/browser'
 import * as sources from './sources'
-
-import { round, sleep } from './utils/bundle'
+import { sleep } from './utils/bundle'
 import constants from './utils/constants'
 import { applyVariation } from './utils/time'
 
@@ -25,6 +23,8 @@ const setupTab = async (tab) => {
   await tab.setViewport({ width: 960, height: 768 })
 }
 
+let console = []
+
 export const start = async () => {
   try {
     while (1) {
@@ -43,13 +43,13 @@ export const start = async () => {
       await Promise.all(runnersPromise)
 
       const sleepDuration = applyVariation(constants.LONGWAIT, constants.LONGWAIT_VARIATION)
-      console.log(chalk.grey(`*** Interval. Waiting for ${round(sleepDuration / 1000 / 60)} minutes.`))
+      // console.log(chalk.grey(`*** Interval. Waiting for ${round(sleepDuration / 1000 / 60)} minutes.`))
 
       await sleep(sleepDuration)
 
       await browser.close()
     }
   } catch (err) {
-    console.log('Could not resolve the browser instance => ', err)
+    // console.log('Could not resolve the browser instance => ', err)
   }
 }

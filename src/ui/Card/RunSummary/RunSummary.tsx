@@ -24,7 +24,7 @@ export const RunSummary = ({ runs, found, errors }: Props) => (
     <Text>
       Errors:{' '}
       <Color red>
-        <Text color="red">{errors}</Text>
+        <Text>{errors}</Text>
       </Color>
     </Text>
   </>

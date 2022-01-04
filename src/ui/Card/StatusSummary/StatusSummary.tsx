@@ -11,7 +11,7 @@ interface Props {
 export const StatusSummary = ({ last, status }: Props) => (
   <>
     <Text>
-      Last: <Text color="grey">{last}</Text>
+      Last: <Text>{last}</Text>
     </Text>
     <Text>Status: {status}</Text>
   </>

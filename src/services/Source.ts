@@ -1,6 +1,5 @@
-import { Entry } from './models/Entry'
-import * as sources from './sources'
-import { RunStatus, SourceStatus } from './ui/types'
+import { Entry } from '../models/Entry'
+import { RunStatus, SourceStatus } from '../ui/types'
 
 export class Source {
   name: string
@@ -44,14 +43,3 @@ export class Source {
     })
   }
 }
-
-let sourcesObj = {}
-export const loadSources = async () => {
-  for (let source in sources) {
-    sourcesObj[source] = new Source(sources[source].source)
-
-    await sourcesObj[source].setup()
-  }
-}
-
-export default sourcesObj

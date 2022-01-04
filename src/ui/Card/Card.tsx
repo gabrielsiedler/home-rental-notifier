@@ -1,7 +1,7 @@
 import { Box } from 'ink'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Source } from '../../sources-manager'
+import { Source } from '../../services/Source'
 import { Spacer } from '../shared/Spacer'
 import { RunSummary } from './RunSummary/RunSummary'
 import { Spinner } from './Spinner/Spinner'
@@ -39,14 +39,14 @@ export const Card = ({
   }, [])
 
   return (
-    <Box borderStyle="single" flexDirection="column" width={33} padding={1}>
+    <Box flexDirection="column" width={33}>
       <Title title={name} />
       <Spacer />
       <RunSummary runs={runs} found={found} errors={errors} />
       <Spacer />
       <StatusSummary last={lastRunStatus} status={status} />
       <Spacer />
-      {timer > 0 ? (
+      {status === 'waiting' ? (
         <Waiting s={timer} />
       ) : (
         <Spinner

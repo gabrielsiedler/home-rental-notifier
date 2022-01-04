@@ -11,7 +11,7 @@ interface Props {
 const SpinnerComponent = ({ currentFilterIndex, amountOfFilters, currentFilterLabel }: Props) => (
   <Box>
     <Text>
-      <Text color="green">
+      <Text>
         {' '}
         <Spinner type="triangle" />
       </Text>{' '}

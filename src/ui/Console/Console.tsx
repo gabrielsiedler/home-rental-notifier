@@ -1,17 +1,18 @@
 import { Box, Color, Text } from 'ink'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import uiConsole from '../../services/Console'
 
-interface Props {
-  console: string[]
-}
+export const Console = () => {
+  const [entries, setEntries] = useState(uiConsole.entries)
 
-export const Console = ({ console }: Props) => {
+  useEffect(() => {
+    setEntries(uiConsole.entries)
+  }, [uiConsole.entries])
+
   return (
     <Box width="100%" flexDirection="column">
-      {console.map((line) => (
-        <Text key={line}>
-          <Color lightgrey>[13:25:14]</Color> {line}
-        </Text>
+      {entries.map((line) => (
+        <Text key={line}>{line}</Text>
       ))}
     </Box>
   )
