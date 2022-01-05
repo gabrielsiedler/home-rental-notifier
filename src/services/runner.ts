@@ -1,9 +1,9 @@
 import uiConsole from '../services/Console'
 import { scraper } from '../services/engine'
+import sourceManager from '../setup/sources'
 import { sleep } from '../utils/bundle'
 import constants from '../utils/constants'
 import { applyVariation } from '../utils/time'
-import sourceManager from '../services/source-manager'
 
 export const runner = async (page, selectors, source, filter, url) => {
   const currentSource = sourceManager[source]

@@ -3,7 +3,9 @@ import BigText from 'ink-big-text'
 import React from 'react'
 
 import { Source } from '../services/Source'
-import sources from '../services/source-manager'
+import sources from '../setup/sources'
+import { StateProvider } from '../state'
+import reducers from '../state/reducers'
 import { Card } from './Card/Card'
 import { Console } from './Console/Console'
 import { Spacer } from './shared/Spacer'
@@ -41,16 +43,14 @@ const App = () => {
   )
 }
 
+const clearAndSetCursor = '\u001b[2J\u001b[0;0H'
 const enterAltScreenCommand = '\x1b[?1049h'
 const leaveAltScreenCommand = '\x1b[?1049l'
 
+process.stdout.write(clearAndSetCursor)
 process.stdout.write(enterAltScreenCommand)
 process.on('exit', () => {
   process.stdout.write(leaveAltScreenCommand)
 })
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-)
+render(<StateProvider initialState={{}} reducer={reducers} children={<App />} />)
