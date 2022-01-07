@@ -4,6 +4,7 @@ export const chavesNaMao = {
   url: () =>
     `https://www.chavesnamao.com.br/casas-para-alugar/sc-florianopolis/itacorubi/3-quartos/?&filtro={%22bai%22:[13931,13963,13939,13966,13922,13950],%22tim%22:[25],%22ban%22:2,%22gar%22:1,%22pmin%22:2500}`,
   selectors: {
+    loadCondition: '.h1__Heading1-sc-13p2880-0',
     listItem: '.imoveis__Card-obm8pe-0',
     grabber: ($, ctx) => {
       const id = $(ctx).attr('id')

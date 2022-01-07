@@ -34,6 +34,7 @@ export const gralha = {
   ],
   url: (filter) => `https://www.gralhaimoveis.com.br/aluguel/casa/bai+sc+florianopolis+${filter.value}`,
   selectors: {
+    loadCondition: '.ListResult_InfoBar_CountMsg',
     listItem: '.ListResult_Wrapper_Card',
     grabber: ($, ctx) => {
       const id = $(ctx).find('.Info_Title_Code').text().replace('Cód.: ', '')
