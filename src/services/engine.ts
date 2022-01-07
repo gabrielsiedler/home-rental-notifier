@@ -1,12 +1,10 @@
 import cheerio from 'cheerio'
-import chalk from 'chalk'
-import prettyjson from 'prettyjson'
 
 import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
 
 export const scraper = async (page, source, filter, url, selectors) => {
-  await page.goto(url)
+  await page.goto(url(filter))
   try {
     await page.waitForSelector(selectors.listItem)
   } catch (error) {
@@ -39,11 +37,8 @@ export const scraper = async (page, source, filter, url, selectors) => {
     return
   }
 
+  console.log('Found house. Sending whatsapp message.')
   sendWhatsappMessage(`${source} ${filter.label}`, houses[0])
-
-  console.log(chalk.blue(`*** Found house:`))
-  console.log(prettyjson.render(houses[0]))
-  console.log('\n')
 
   await Entry.createRun(source, filter, currentHouseId, 'found')
 }

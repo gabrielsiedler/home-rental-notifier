@@ -1,23 +1,31 @@
-import chalk from 'chalk'
-
 import { scraper } from '../services/engine'
-import { error, sleep } from '../utils/bundle'
+import sourceManager from '../setup/sources'
+import { sleep } from '../utils/bundle'
 import constants from '../utils/constants'
 import { applyVariation } from '../utils/time'
 
 export const runner = async (page, selectors, source, filter, url) => {
+  // const currentSource = sourceManager[source]
+
   try {
-    console.log(chalk.grey(`\n*** Starting ${source} - ${filter.label}`))
+    console.log(`Starting ${source} - ${filter.label}`)
+    // currentSource.status = 'running'
+    // currentSource.currentFilter = {
+    //   label: filter.label,
+    //   index: 1,
+    // }
 
     await scraper(page, source, filter, url, selectors)
 
-    console.log(chalk.green(`*** Completed ${source} - ${filter.label}`))
+    // currentSource.runs += 1
+    console.log(`Completed ${source} - ${filter.label}`)
   } catch (e) {
-    console.log(error(`*** ${source} Failed - ${filter.label}`, e))
+    // currentSource.errors += 1
+    console.log(`Failed ${source} - ${filter.label}`, e)
   }
 
   const sleepDuration = applyVariation(constants.WAIT, constants.WAIT_VARIATION)
-  console.log(chalk.grey(`*** Waiting for ${sleepDuration / 1000} seconds.`))
+  // currentSource.status = 'waiting'
 
   await sleep(sleepDuration)
 }

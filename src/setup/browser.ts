@@ -2,8 +2,6 @@ export const startBrowser = async (puppeteer) => {
   let browser
 
   try {
-    console.log('Opening the browser...')
-
     browser = await puppeteer.launch({
       args: [
         '--disable-gpu',

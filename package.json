@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "migrate:create": "ts-node migrations/index.ts new",
     "migrate:up": "ts-node migrations/index.ts up",
     "migrate:down": "ts-node migrations/index.ts down"
@@ -13,6 +14,7 @@
   "author": "gabrielsiedler",
   "license": "ISC",
   "dependencies": {
+    "cfonts": "^2.10.0",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
@@ -20,6 +22,8 @@
     "mongoose": "^6.1.4",
     "prettyjson": "^1.2.1",
     "puppeteer": "^13.0.1",
+    "react": "^17.0.2",
+    "redux": "4",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "twilio": "^3.72.0",

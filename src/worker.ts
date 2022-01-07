@@ -1,41 +1,18 @@
 import chalk from 'chalk'
 import puppeteer from 'puppeteer'
 
+import { runner } from './services/runner'
 import { startBrowser } from './setup/browser'
-import { runArbo } from './sources/arbo'
-import { runBrognoli } from './sources/brognoli'
-import { runChavesNaMao } from './sources/chaves-na-mao'
-import { runDaltonAndrade } from './sources/dalton-andrade'
-import { runGiacomelli } from './sources/giacomelli'
-import { runGralha } from './sources/gralha'
-import { runIbagy } from './sources/ibagy'
-import { runJump } from './sources/jump'
-import { runOlx } from './sources/olx'
-import { runQuintoAndar } from './sources/quinto-andar'
-import { runRegente } from './sources/regente'
-import { runSeiter } from './sources/seiter'
-import { runVivaReal } from './sources/vivareal'
-import { runZap } from './sources/zap'
-import { sleep } from './utils/bundle'
+import * as sources from './sources'
+import { round, sleep } from './utils/bundle'
 import constants from './utils/constants'
 import { applyVariation } from './utils/time'
 
-const runners: any = [
-  runOlx,
-  runZap,
-  runQuintoAndar,
-  runBrognoli,
-  runIbagy,
-  runGiacomelli,
-  runVivaReal,
-  runRegente,
-  runGralha,
-  runChavesNaMao,
-  runDaltonAndrade,
-  runArbo,
-  runSeiter,
-  runJump,
-]
+export const run = async (page, { selectors, source, filters, url }) => {
+  for (const filter of filters) {
+    await runner(page, selectors, source, filter, url)
+  }
+}
 
 const setupTab = async (tab) => {
   await tab.setDefaultNavigationTimeout(constants.TIMEOUT)
@@ -50,22 +27,24 @@ const setupTab = async (tab) => {
 export const start = async () => {
   try {
     while (1) {
+      await sleep(100)
+
       let browser = await startBrowser(puppeteer)
 
       let runnersPromise: any = []
 
-      for (let i = 0; i < runners.length; i += 1) {
+      for (let source in sources) {
         const tab = await browser.newPage()
 
         await setupTab(tab)
 
-        runnersPromise.push(runners[i](tab))
+        runnersPromise.push(run(tab, sources[source]))
       }
 
       await Promise.all(runnersPromise)
 
       const sleepDuration = applyVariation(constants.LONGWAIT, constants.LONGWAIT_VARIATION)
-      console.log(chalk.grey(`*** Interval. Waiting for ${sleepDuration / 1000 / 60} minutes.`))
+      console.log(chalk.grey(`*** Interval. Waiting for ${round(sleepDuration / 1000 / 60)} minutes.`))
 
       await sleep(sleepDuration)
 

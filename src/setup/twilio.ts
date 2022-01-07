@@ -7,4 +7,6 @@ export const twilioSetup = async () => {
   const authToken = process.env.TWILIO_AUTH_TOKEN
 
   twilioClient = await twilio(accountSid, authToken)
+
+  console.log('Connected to Twilio.')
 }

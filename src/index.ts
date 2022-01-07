@@ -1,16 +1,23 @@
 import dotenv from 'dotenv'
-
 import { mongooseSetup } from './setup/db'
+import { setupSources } from './setup/sources'
 import { twilioSetup } from './setup/twilio'
 import * as worker from './worker'
-
 dotenv.config()
+import CFonts from 'cfonts'
 
-const start = async () => {
-  await twilioSetup()
-  await mongooseSetup()
+const setupAll = async () => {
+  CFonts.say('HRN')
 
-  worker.start()
+  try {
+    await twilioSetup()
+    await mongooseSetup()
+    await setupSources()
+
+    worker.start()
+  } catch (e) {
+    console.error('Error on startup', e)
+  }
 }
 
-start()
+setupAll()
