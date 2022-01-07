@@ -3,14 +3,14 @@ import * as sources from '../sources'
 
 let sourcesObj = {}
 
-export const setupSources = async (addToConsole) => {
+export const setupSources = async () => {
   for (let source in sources) {
     sourcesObj[source] = new Source(sources[source].source)
 
     await sourcesObj[source].setup()
   }
 
-  addToConsole('Sources loaded.')
+  console.log('Sources loaded.')
 }
 
 export default sourcesObj

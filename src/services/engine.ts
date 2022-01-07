@@ -1,5 +1,4 @@
 import cheerio from 'cheerio'
-import uiConsole from '../services/Console'
 
 import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
@@ -38,7 +37,7 @@ export const scraper = async (page, source, filter, url, selectors) => {
     return
   }
 
-  uiConsole.addEntry('Found house. Sending whatsapp message.')
+  console.log('Found house. Sending whatsapp message.')
   sendWhatsappMessage(`${source} ${filter.label}`, houses[0])
 
   await Entry.createRun(source, filter, currentHouseId, 'found')

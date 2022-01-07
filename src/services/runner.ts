@@ -1,4 +1,3 @@
-import uiConsole from '../services/Console'
 import { scraper } from '../services/engine'
 import sourceManager from '../setup/sources'
 import { sleep } from '../utils/bundle'
@@ -6,23 +5,23 @@ import constants from '../utils/constants'
 import { applyVariation } from '../utils/time'
 
 export const runner = async (page, selectors, source, filter, url) => {
-  const currentSource = sourceManager[source]
+  // const currentSource = sourceManager[source]
 
   try {
-    uiConsole.addEntry(`Starting ${source} - ${filter.label}`)
-    currentSource.status = 'running'
-    currentSource.currentFilter = {
-      label: filter.label,
-      index: 1,
-    }
+    console.log(`Starting ${source} - ${filter.label}`)
+    // currentSource.status = 'running'
+    // currentSource.currentFilter = {
+    //   label: filter.label,
+    //   index: 1,
+    // }
 
     await scraper(page, source, filter, url, selectors)
 
-    currentSource.runs += 1
-    uiConsole.addEntry(`Completed ${source} - ${filter.label}`)
+    // currentSource.runs += 1
+    console.log(`Completed ${source} - ${filter.label}`)
   } catch (e) {
     // currentSource.errors += 1
-    uiConsole.addEntry(`Failed ${source} - ${filter.label}`)
+    console.log(`Failed ${source} - ${filter.label}`, e)
   }
 
   const sleepDuration = applyVariation(constants.WAIT, constants.WAIT_VARIATION)

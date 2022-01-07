@@ -1,18 +1,17 @@
 const mongoose = require('mongoose')
 
-export const mongooseSetup = (addToConsole) =>
-  // new Promise((resolve, reject) => {
-  // mongoose.connect(process.env.MONGODB_URI, (err) => {
-  //   if (err) {
-  //     addToConsole('Error: Could not connect to Mongo.')
+export const mongooseSetup = () =>
+  new Promise((resolve, reject) => {
+    mongoose.connect(process.env.MONGODB_URI, (err) => {
+      if (err) {
+        console.error('Error: Could not connect to Mongo.')
 
-  //     return reject(err)
-  //   }
+        return reject(err)
+      }
 
-  //   addToConsole('Connected to Mongo.')
-  //   resolve(true)
-  // })
-  mongoose.connect(process.env.MONGODB_URI)
-// })
+      console.log('Connected to Mongo.')
+      resolve(true)
+    })
+  })
 
 export { mongoose }
