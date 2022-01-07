@@ -28,6 +28,8 @@ let console = []
 export const start = async () => {
   try {
     while (1) {
+      await sleep(400)
+
       let browser = await startBrowser(puppeteer)
 
       let runnersPromise: any = []

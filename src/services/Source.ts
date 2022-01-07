@@ -1,5 +1,5 @@
 import { Entry } from '../models/Entry'
-import { RunStatus, SourceStatus } from '../ui/types'
+import { RunStatus, SourceStatus } from '../types'
 
 export class Source {
   name: string

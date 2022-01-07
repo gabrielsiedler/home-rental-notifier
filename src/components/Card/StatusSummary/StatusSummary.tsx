@@ -1,7 +1,7 @@
 import { Text } from 'ink'
 import React from 'react'
 
-import { RunStatus, SourceStatus } from '../../types'
+import { RunStatus, SourceStatus } from '../../../types'
 
 interface Props {
   last: RunStatus
