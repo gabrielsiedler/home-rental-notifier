@@ -17,29 +17,29 @@ interface Props {
 export const Card = ({
   source: { name, runs, found, errors, lastRunStatus, status, currentFilter, totalFilters },
 }: Props) => {
-  const [timer, setTimer] = useState(Math.round(Math.random() * (23 - 7) + 7))
+  // const [timer, setTimer] = useState(Math.round(Math.random() * (23 - 7) + 7))
 
-  useEffect(() => {
-    const _t = setInterval(() => {
-      let _prevTimer
-      setTimer((prevTimer) => {
-        _prevTimer = prevTimer
+  // useEffect(() => {
+  //   const _t = setInterval(() => {
+  //     let _prevTimer
+  //     setTimer((prevTimer) => {
+  //       _prevTimer = prevTimer
 
-        if (prevTimer <= 0) return 0
+  //       if (prevTimer <= 0) return 0
 
-        return prevTimer - 1
-      })
+  //       return prevTimer - 1
+  //     })
 
-      if (_prevTimer <= 0) {
-        clearInterval(_t)
-      }
-    }, 1000)
+  //     if (_prevTimer <= 0) {
+  //       clearInterval(_t)
+  //     }
+  //   }, 1000)
 
-    return () => clearInterval(_t)
-  }, [])
+  //   return () => clearInterval(_t)
+  // }, [])
 
   return (
-    <Box flexDirection="column" width={33}>
+    <Box flexDirection="column" borderStyle="round" width={33}>
       <Title title={name} />
       <Spacer />
       <RunSummary runs={runs} found={found} errors={errors} />
@@ -47,7 +47,7 @@ export const Card = ({
       <StatusSummary last={lastRunStatus} status={status} />
       <Spacer />
       {status === 'waiting' ? (
-        <Waiting s={timer} />
+        <Waiting s={10} />
       ) : (
         <Spinner
           currentFilterIndex={currentFilter.index}

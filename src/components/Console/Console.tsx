@@ -1,6 +1,6 @@
-import { Box, Color, Text } from 'ink'
-import React, { useState, useEffect } from 'react'
-import uiConsole from '../../services/Console'
+import { Box, Text } from 'ink'
+import React from 'react'
+
 import { useStateValue } from '../../state'
 
 export const Console = () => {
@@ -13,8 +13,8 @@ export const Console = () => {
   const [{ console }] = useStateValue()
 
   return (
-    <Box width="100%" flexDirection="column">
-      {console.map((line) => (
+    <Box flexGrow={1} borderStyle="round" marginLeft={2} flexDirection="column">
+      {(console ?? []).map((line) => (
         <Text key={line}>{line}</Text>
       ))}
     </Box>

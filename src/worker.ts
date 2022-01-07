@@ -28,7 +28,7 @@ let console = []
 export const start = async () => {
   try {
     while (1) {
-      await sleep(400)
+      await sleep(100)
 
       let browser = await startBrowser(puppeteer)
 
