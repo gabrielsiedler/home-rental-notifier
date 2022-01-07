@@ -4,8 +4,11 @@ import { setupSources } from './setup/sources'
 import { twilioSetup } from './setup/twilio'
 import * as worker from './worker'
 dotenv.config()
+import CFonts from 'cfonts'
 
 const setupAll = async () => {
+  CFonts.say('HRN')
+
   try {
     await twilioSetup()
     await mongooseSetup()

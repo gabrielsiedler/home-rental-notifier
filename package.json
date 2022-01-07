@@ -14,12 +14,10 @@
   "author": "gabrielsiedler",
   "license": "ISC",
   "dependencies": {
+    "cfonts": "^2.10.0",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
-    "ink": "^3.2.0",
-    "ink-big-text": "^1.2.0",
-    "ink-spinner": "^4.0.3",
     "mongo-migrate-ts": "^1.0.13",
     "mongoose": "^6.1.4",
     "prettyjson": "^1.2.1",
