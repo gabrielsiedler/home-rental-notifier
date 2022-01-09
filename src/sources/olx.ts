@@ -11,6 +11,7 @@ export const olx = {
   ],
   url: (filter) => `https://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel/casas?ps=2000&q=${filter.value}&sf=1`,
   selectors: {
+    loadCondition: '.sc-1mi5vq6-2',
     listItem: '.sc-1fcmfeb-2',
     grabber: ($, ctx) => {
       const _link = $(ctx).find('a')

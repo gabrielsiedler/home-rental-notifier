@@ -4,6 +4,7 @@ export const giacomelli = {
   url: () =>
     `https://www.giacomelli.com.br/imoveis/residencial/casas/florianopolis/centro/trindade/itacorubi/campeche/agronomica/santa-monica/corrego-grande/lagoa-da-conceicao/min-2500/max-20000`,
   selectors: {
+    loadCondition: '.HeaderLine-title-LrTXS',
     listItem: '.Imoveis_cardDisplay__1h0PV',
     grabber: ($, ctx) => {
       const splitUrl = $(ctx).find('a').first().attr('href').split('-')

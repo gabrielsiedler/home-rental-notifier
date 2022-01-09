@@ -11,6 +11,7 @@ export const ibagy = {
   ],
   url: (filter) => `https://ibagy.com.br/aluguel/casa/florianopolis/${filter.value}/2-dormitorios/com-suite/com-vaga/`,
   selectors: {
+    loadCondition: '.result-totals-phrase',
     listItem: '.imovel-box-single',
     grabber: ($, ctx) => {
       const id = $(ctx).find('button[data-codigo]').first().attr('data-codigo')

@@ -4,6 +4,7 @@ export const jump = {
   url: () =>
     `https://www.jumpimoveis.com.br/imoveis/para-alugar/casa/florianopolis/itacorubi+corrego-grande+lagoa-da-conceicao+santa-monica+trindade+agronomica+campeche+agronomica`,
   selectors: {
+    loadCondition: '.digital-title.title-listing',
     listItem: '.card-with-buttons',
     grabber: ($, ctx) => {
       const href = `https://www.jumpimoveis.com.br${$(ctx).attr('href')}`
