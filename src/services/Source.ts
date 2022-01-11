@@ -1,6 +1,5 @@
 import { Entry } from '../models/Entry'
 import { RunStatus, SourceStatus } from '../types'
-import { UI } from './UI'
 
 export class Source {
   name: string
@@ -10,7 +9,6 @@ export class Source {
   empty: number
   lastRunStatus: RunStatus
   status: SourceStatus
-  ui?: UI
 
   currentFilter: {
     label: string

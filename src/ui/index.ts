@@ -21,8 +21,6 @@ const drawTitle = () => {
   rl.cursorTo(process.stdout, 0, 10)
 }
 
-const aggregator: any = []
-
 const calculateBoxPosition = (srcIndex: number) => {
   const column = Math.floor(srcIndex / 6)
   const line = srcIndex % 6
@@ -38,10 +36,10 @@ export const initialDraw = (sources) => {
     const source = sources[srcKey]
     const ui = new UI(calculateBoxPosition(i), source)
 
-    aggregator.push(ui)
-
     ui.draw()
 
     uiObj[srcKey] = ui
   })
+
+  return uiObj
 }

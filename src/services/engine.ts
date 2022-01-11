@@ -11,7 +11,7 @@ export const scraper = async (page, source, filter, url, selectors, ui) => {
     await Entry.createRun(source, filter, null, 'error')
     ui.source.errors += 1
 
-    throw error
+    return
   }
 
   try {
@@ -28,16 +28,23 @@ export const scraper = async (page, source, filter, url, selectors, ui) => {
   const $ = cheerio.load(html)
 
   const houses: any = []
+  let currentHouseId
+  try {
+    $(selectors.listItem).each(function (this: any) {
+      const house = selectors.grabber($, this)
 
-  $(selectors.listItem).each(function (this: any) {
-    const house = selectors.grabber($, this)
+      if (!house.id) return
 
-    if (!house.id) return
+      houses.push(house)
+    })
 
-    houses.push(house)
-  })
+    currentHouseId = houses[0].id
+  } catch (error) {
+    await Entry.createRun(source, filter, null, 'error')
+    ui.source.errors += 1
 
-  const currentHouseId = houses[0].id
+    return
+  }
 
   const houseAlreadyFound = await Entry.containsHouseId(source, filter, currentHouseId)
 

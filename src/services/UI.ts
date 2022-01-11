@@ -1,6 +1,7 @@
 import chalk from 'chalk'
 import emoji from 'node-emoji'
 import rl from 'readline'
+import { SourceStatus } from '../types'
 
 import { Spinner } from '../ui/spinner'
 import { Source } from './Source'
@@ -19,6 +20,7 @@ const BOX_HEIGHT = 3
 export class UI {
   position: [number, number]
   source: Source
+  spinner: Spinner
 
   constructor(position, source) {
     const column = (position[0] + GAP[0]) * COLUMN_WIDTH
@@ -26,21 +28,27 @@ export class UI {
 
     this.position = [column, line]
     this.source = source
+    this.spinner = new Spinner(this.position)
   }
 
   draw() {
     const pos = this.position
-    const spinner = new Spinner(pos)
+
+    const { currentFilter, totalFilters, status } = this.source
+
+    let str
+    if (status === SourceStatus.Running) {
+      str = chalk.bold.blue(this.source.name) + ` [${currentFilter.index}/${totalFilters}] ${currentFilter.label}`
+    } else {
+      str = chalk.bold.blue(this.source.name) + ' ' + chalk.grey(`Waiting...`)
+    }
 
     rl.cursorTo(process.stdout, pos[0] + 2, pos[1])
-
-    const { currentFilter, totalFilters } = this.source
-    console.log(chalk.bold.blue(this.source.name), `[${currentFilter.index}/${totalFilters}] ${currentFilter.label}`)
+    const fullStr = str.padEnd(65, ' ')
+    console.log(fullStr)
 
     rl.cursorTo(process.stdout, pos[0] + 2, pos[1] + 1)
     const { found, errors, runs } = this.source
     console.log(icons.found, `${found} `, icons.empty, `0`, icons.error, `${errors} `, icons.runs, `${runs} `)
-
-    spinner.start()
   }
 }
