@@ -15,8 +15,8 @@ const clearScreen = () => {
 const drawTitle = () => {
   hideCursor()
   clearScreen()
-  CFonts.say('HRN')
-  rl.cursorTo(process.stdout, 4, 8)
+  CFonts.say('HRN', { align: 'center' })
+  rl.cursorTo(process.stdout, 58, 8)
   console.log(`House Rental Notifier`)
   rl.cursorTo(process.stdout, 0, 10)
 }

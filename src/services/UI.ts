@@ -43,11 +43,11 @@ export class UI {
       str = chalk.bold.blue(this.source.name) + ' ' + chalk.grey(`Waiting...`)
     }
 
-    rl.cursorTo(process.stdout, pos[0] + 2, pos[1])
+    rl.cursorTo(process.stdout, 3 + pos[0] + 2, pos[1])
     const fullStr = str.padEnd(65, ' ')
     console.log(fullStr)
 
-    rl.cursorTo(process.stdout, pos[0] + 2, pos[1] + 1)
+    rl.cursorTo(process.stdout, 3 + pos[0] + 2, pos[1] + 1)
     const { found, errors, runs } = this.source
     console.log(icons.found, `${found} `, icons.empty, `0`, icons.error, `${errors} `, icons.runs, `${runs} `)
   }
