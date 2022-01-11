@@ -1,8 +1,7 @@
 import CFonts from 'cfonts'
-import chalk from 'chalk'
 import rl from 'readline'
-import emoji from 'node-emoji'
-import { Spinner } from './spinner'
+
+import { UI } from '../services/UI'
 
 const hideCursor = () => {
   console.log('\x1B[?25l')
@@ -22,28 +21,27 @@ const drawTitle = () => {
   rl.cursorTo(process.stdout, 0, 10)
 }
 
-export const draw = () => {
-  const initialPosition: [number, number] = [0, 10]
+const aggregator: any = []
 
+const calculateBoxPosition = (srcIndex: number) => {
+  const column = Math.floor(srcIndex / 6)
+  const line = srcIndex % 6
+
+  return [column, line]
+}
+
+export const initialDraw = (sources) => {
   drawTitle()
-  drawWorker(initialPosition)
-}
 
-const icons = {
-  found: chalk.hex('#30AF2B')(emoji.get('house')),
-  empty: chalk.yellow(emoji.get('question')),
-  error: chalk.red(emoji.get('warning')),
-  runs: chalk.grey(emoji.get('gear')),
-}
+  const uiObj: any = {}
+  Object.keys(sources).forEach((srcKey, i) => {
+    const source = sources[srcKey]
+    const ui = new UI(calculateBoxPosition(i), source)
 
-const drawWorker = (workerPosition: [number, number]) => {
-  const spinner = new Spinner(workerPosition)
+    aggregator.push(ui)
 
-  rl.cursorTo(process.stdout, workerPosition[0] + 2, workerPosition[1])
-  console.log(chalk.bold.blue('OLX'), '[1/3] Casas - Itacorubi')
+    ui.draw()
 
-  rl.cursorTo(process.stdout, workerPosition[0] + 2, workerPosition[1] + 1)
-  console.log(icons.found, '3 ', icons.empty, '42 ', icons.error, '1 ', icons.runs, '253 ')
-
-  spinner.start()
+    uiObj[srcKey] = ui
+  })
 }

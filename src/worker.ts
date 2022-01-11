@@ -8,12 +8,6 @@ import { round, sleep } from './utils/bundle'
 import constants from './utils/constants'
 import { applyVariation } from './utils/time'
 
-export const run = async (page, { selectors, source, filters, url }) => {
-  for (const filter of filters) {
-    await runner(page, selectors, source, filter, url)
-  }
-}
-
 const setupTab = async (tab) => {
   await tab.setDefaultNavigationTimeout(constants.TIMEOUT)
 
@@ -25,11 +19,11 @@ const setupTab = async (tab) => {
 }
 
 class Worker {
-  source
   browser
+  ui
 
-  constructor(source) {
-    this.source = source
+  constructor(ui) {
+    this.ui = ui
   }
 
   async run() {
@@ -39,10 +33,10 @@ class Worker {
 
     await setupTab(tab)
 
-    const { selectors, source, filters, url } = sources[this.source]
+    const { selectors, source, filters, url } = this.ui.source
 
     for (const filter of filters) {
-      await runner(tab, selectors, source, filter, url)
+      await runner(tab, selectors, source, filter, url, this.ui)
     }
   }
 
@@ -60,10 +54,10 @@ class Worker {
   }
 }
 
-export const start = async () => {
+export const start = async (uiObj) => {
   try {
-    for (let source in sources) {
-      const currentWorker = new Worker(source)
+    for (let ui in uiObj) {
+      const currentWorker = new Worker(uiObj[ui])
 
       currentWorker.start()
     }

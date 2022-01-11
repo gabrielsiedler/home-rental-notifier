@@ -1,13 +1,16 @@
 import { Entry } from '../models/Entry'
 import { RunStatus, SourceStatus } from '../types'
+import { UI } from './UI'
 
 export class Source {
   name: string
   runs: number
   found: number
   errors: number
+  empty: number
   lastRunStatus: RunStatus
   status: SourceStatus
+  ui?: UI
 
   currentFilter: {
     label: string
@@ -20,6 +23,7 @@ export class Source {
     this.runs = 0
     this.found = 0
     this.errors = 0
+    this.empty = 0
     this.lastRunStatus = RunStatus.Unchanged
     this.status = SourceStatus.Waiting
     this.currentFilter = {

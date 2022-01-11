@@ -1,4 +1,5 @@
 import { Source } from '../services/Source'
+import { UI } from '../services/UI'
 import * as sources from '../sources'
 
 let sourcesObj = {}

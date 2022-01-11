@@ -3,12 +3,13 @@ import cheerio from 'cheerio'
 import { Entry } from '../models/Entry'
 import { sendWhatsappMessage } from '../services/twilio'
 
-export const scraper = async (page, source, filter, url, selectors) => {
+export const scraper = async (page, source, filter, url, selectors, ui) => {
   await page.goto(url(filter))
   try {
     await page.waitForSelector(selectors.loadCondition)
   } catch (error) {
     await Entry.createRun(source, filter, null, 'error')
+    ui.source.errors += 1
 
     throw error
   }
@@ -17,6 +18,7 @@ export const scraper = async (page, source, filter, url, selectors) => {
     await page.waitForSelector(selectors.listItem)
   } catch (error) {
     await Entry.createRun(source, filter, null, 'empty')
+    ui.source.empty += 1
 
     return
   }
@@ -41,12 +43,14 @@ export const scraper = async (page, source, filter, url, selectors) => {
 
   if (houseAlreadyFound) {
     await Entry.createRun(source, filter, currentHouseId, 'unchanged')
+    ui.source.unchanged += 1
+  } else {
+    sendWhatsappMessage(`${source} ${filter.label}`, houses[0])
 
-    return
+    await Entry.createRun(source, filter, currentHouseId, 'found')
+
+    ui.source.found += 1
   }
 
-  console.log('Found house. Sending whatsapp message.')
-  sendWhatsappMessage(`${source} ${filter.label}`, houses[0])
-
-  await Entry.createRun(source, filter, currentHouseId, 'found')
+  ui.draw()
 }
