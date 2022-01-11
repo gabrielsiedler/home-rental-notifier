@@ -6,7 +6,7 @@ export class Spinner {
   frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
 
   constructor(position: [number, number]) {
-    this.position = position
+    this.position = [position[0] + 3, position[1]]
   }
 
   start() {
