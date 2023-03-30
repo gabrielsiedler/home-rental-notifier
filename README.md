@@ -7,10 +7,10 @@
 
   <h3 align="center">House Rental Notifier</h3>
 
-  <p align="center">
-    I was tired of daily searching houses on multiple real estate websites.
+  <p align="center">   
+    I was tired of daily searching for houses on multiple real estate websites.
     <br/>
-    Instead, this does for me and sends me a WhatsApp when something new arrives.
+    Instead, this does it for me and sends me a WhatsApp message when something new arrives.
   </p>
 </div>
 
